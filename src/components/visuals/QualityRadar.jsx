@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { NFR_PILLARS } from '../../data/slides'
-import { useCoarsePointer } from '../../hooks/useMedia'
+import { usePresentation } from '../../hooks/usePresentation'
 import { LINE_ICONS } from '../icons/Icons'
 
 const VB_W = 1280
@@ -42,18 +42,42 @@ function fanD(index, radius) {
   return `M${midA.x.toFixed(2)} ${midA.y.toFixed(2)} L${curr.x.toFixed(2)} ${curr.y.toFixed(2)} L${midB.x.toFixed(2)} ${midB.y.toFixed(2)}`
 }
 
+const REVEAL_ORDER = NFR_PILLARS.map((pillar) => pillar.id)
+const MAX_STEP = REVEAL_ORDER.length
+
 export function QualityRadar({ active = false, collapsing = false }) {
-  const coarse = useCoarsePointer()
+  const { registerInnerNav } = usePresentation()
   const [played, setPlayed] = useState(false)
-  const [open, setOpen] = useState(null)
+  const [step, setStep] = useState(0)
+  const stepRef = useRef(0)
+  stepRef.current = step
 
   useEffect(() => {
     if (active) setPlayed(true)
+    else setStep(0)
   }, [active])
 
   useEffect(() => {
-    if (collapsing) setOpen(null)
+    if (collapsing) setStep(0)
   }, [collapsing])
+
+  useEffect(() => {
+    if (!active) return undefined
+    return registerInnerNav((dir) => {
+      const current = stepRef.current
+      if (dir > 0 && current < MAX_STEP) {
+        setStep(current + 1)
+        return true
+      }
+      if (dir < 0 && current > 0) {
+        setStep(current - 1)
+        return true
+      }
+      return false
+    })
+  }, [active, registerInnerNav])
+
+  const open = step > 0 ? REVEAL_ORDER[step - 1] : null
 
   const geometry = useMemo(
     () =>
@@ -73,24 +97,17 @@ export function QualityRadar({ active = false, collapsing = false }) {
 
   const rings = useMemo(() => RING_SCALES.map((scale) => hexD(RADIUS * scale)), [])
 
-  const onEnter = (id) => {
-    if (!coarse) setOpen(id)
-  }
-
-  const onLeave = () => {
-    if (!coarse) setOpen(null)
-  }
-
   const onToggle = (id) => {
-    if (!coarse) return
-    setOpen((value) => (value === id ? null : id))
+    const index = REVEAL_ORDER.indexOf(id)
+    if (index < 0) return
+    setStep(index + 1)
   }
 
   const lit = Boolean(open)
 
   return (
     <div
-      className={`quality-radar ${active || played ? 'is-active' : ''} ${lit ? 'is-lit' : ''} ${collapsing ? 'is-collapsing' : ''}`}
+      className={`quality-radar ${active || played ? 'is-active' : ''} ${lit ? 'is-lit' : ''} ${collapsing ? 'is-collapsing' : ''} ${open ? 'is-revealing' : 'is-overview'}`}
     >
       <div className="radar-stage">
         <svg
@@ -160,14 +177,10 @@ export function QualityRadar({ active = false, collapsing = false }) {
                 left: `${item.left}%`,
                 top: `${item.top}%`,
               }}
-              onMouseEnter={() => onEnter(pillar.id)}
-              onMouseLeave={onLeave}
             >
               <button
                 type="button"
                 className={`radar-node ${hot ? 'is-hot' : ''}`}
-                onFocus={() => onEnter(pillar.id)}
-                onBlur={onLeave}
                 onClick={() => onToggle(pillar.id)}
                 aria-expanded={hot}
                 aria-controls={hot ? panelId : undefined}
