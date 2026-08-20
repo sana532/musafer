@@ -2,12 +2,11 @@ import { usePresentation } from '../hooks/usePresentation'
 import {
   AnimatedHeading,
   PresentationSection,
-  Reveal,
 } from '../components/presentation/PresentationSection'
-import { FeatureMap } from '../components/visuals/FeatureMap'
+import { FeatureShowcase } from '../components/visuals/FeatureShowcase'
 
 export function FeaturesSlide() {
-  const { activeId, goBy } = usePresentation()
+  const { activeId } = usePresentation()
 
   return (
     <PresentationSection id="features" labelledBy="features-title">
@@ -18,13 +17,7 @@ export function FeaturesSlide() {
         </AnimatedHeading>
       </div>
 
-      <FeatureMap active={activeId === 'features'} gathering={activeId === 'nfr'} />
-
-      <Reveal delay={420} className="section-bridge">
-        <button type="button" onClick={() => goBy(1)}>
-          ما الذي يجب أن يضمنه النظام؟
-        </button>
-      </Reveal>
+      <FeatureShowcase active={activeId === 'features'} />
     </PresentationSection>
   )
 }

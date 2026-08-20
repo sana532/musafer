@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { PROCESS_MODEL } from '../../data/slides'
 import { usePresentation } from '../../hooks/usePresentation'
 
@@ -10,6 +10,8 @@ const RX = 428
 const RY = 255
 const STAGE_COUNT = PROCESS_MODEL.stages.length
 const MAX_STEP = STAGE_COUNT
+const STEP_MS = 760
+const START_MS = 480
 
 function ellipsePoint(index, count = STAGE_COUNT) {
   const deg = -90 + (index * 360) / count
@@ -27,10 +29,8 @@ function arcD(from, to) {
 }
 
 export function ProcessLoop({ active = false }) {
-  const { registerInnerNav } = usePresentation()
+  const { reduced } = usePresentation()
   const [step, setStep] = useState(0)
-  const stepRef = useRef(0)
-  stepRef.current = step
 
   const geometry = useMemo(() => {
     const points = PROCESS_MODEL.stages.map((stage, index) => {
@@ -56,26 +56,33 @@ export function ProcessLoop({ active = false }) {
   }, [])
 
   useEffect(() => {
-    if (!active) return undefined
-    return registerInnerNav((dir) => {
-      const current = stepRef.current
-      if (dir > 0 && current < MAX_STEP) {
-        setStep(current + 1)
-        return true
-      }
-      if (dir < 0 && current > 0) {
-        setStep(current - 1)
-        return true
-      }
-      return false
-    })
-  }, [active, registerInnerNav])
+    if (!active) {
+      setStep(0)
+      return undefined
+    }
 
-  const now = step >= STAGE_COUNT ? 0 : step
+    if (reduced) {
+      setStep(MAX_STEP)
+      return undefined
+    }
+
+    setStep(0)
+    const timers = []
+    for (let next = 1; next <= MAX_STEP; next += 1) {
+      timers.push(window.setTimeout(() => setStep(next), START_MS + (next - 1) * STEP_MS))
+    }
+
+    return () => {
+      timers.forEach((id) => window.clearTimeout(id))
+    }
+  }, [active, reduced])
+
+  const looped = step >= MAX_STEP
+  const now = looped ? -1 : step
 
   return (
     <div
-      className={`process-loop ${active ? 'is-active' : ''} ${step >= MAX_STEP ? 'is-looped' : ''}`}
+      className={`process-loop ${active ? 'is-active' : ''} ${looped ? 'is-looped' : ''}`}
       data-step={step}
     >
       <div className="process-orbit">
@@ -103,7 +110,7 @@ export function ProcessLoop({ active = false }) {
 
           {geometry.segments.map((segment) => {
             const on = active && step > segment.index
-            const latest = active && step === segment.index + 1
+            const latest = active && !looped && step === segment.index + 1
             return (
               <path
                 key={segment.id}
@@ -121,7 +128,7 @@ export function ProcessLoop({ active = false }) {
         {geometry.points.map((item) => {
           const revealed = active && step >= item.index
           const isNow = revealed && item.index === now
-          const isPast = revealed && !isNow
+          const isPast = revealed && now >= 0 && !isNow
           return (
             <div
               key={item.stage.id}
