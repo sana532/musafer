@@ -320,7 +320,7 @@ export const ARCHITECTURE = {
     { id: 'admin', ar: 'مدير المنصة', stack: 'Super Admin · React / Filament', icon: 'control' },
   ],
   backend: { label: 'Backend / API', stack: 'Laravel', icon: 'server' },
-  database: { label: 'Database', stack: 'MySQL', icon: 'database' },
+  database: { label: 'Database', stack: 'PostgreSQL', icon: 'database' },
   services: [
     'Queues · Caching',
     'Seat Locking',
