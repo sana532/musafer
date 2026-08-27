@@ -14,9 +14,9 @@ export function FutureSlide() {
     <PresentationSection id="future" labelledBy="future-title">
       <div className="section-head">
         <span className="section-index">
-          <span>09</span>
+          <span>11</span>
           <span className="progress-rule" aria-hidden="true" />
-          <span className="progress-current">10</span>
+          <span className="progress-current">12</span>
         </span>
         <AnimatedHeading>
           <span id="future-title">{FUTURE.title}</span>

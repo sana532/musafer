@@ -8,12 +8,12 @@ import {
 import { ArchitectureMap } from '../components/visuals/ArchitectureMap'
 
 export function ArchitectureSlide() {
-  const { activeId } = usePresentation()
+  const { activeId, goBy } = usePresentation()
 
   return (
     <PresentationSection id="architecture" labelledBy="architecture-title">
       <div className="section-head">
-        <span className="section-index">07</span>
+        <span className="section-index">09</span>
         <AnimatedHeading>
           <span id="architecture-title">{ARCHITECTURE.title}</span>
         </AnimatedHeading>
@@ -26,6 +26,12 @@ export function ArchitectureSlide() {
       </div>
 
       <ArchitectureMap active={activeId === 'architecture'} />
+
+      <Reveal delay={520} className="section-bridge">
+        <button type="button" onClick={() => goBy(1)}>
+          كيف طوّرنا هذا النظام؟
+        </button>
+      </Reveal>
     </PresentationSection>
   )
 }

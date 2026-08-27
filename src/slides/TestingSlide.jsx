@@ -13,7 +13,7 @@ export function TestingSlide() {
   return (
     <PresentationSection id="testing" labelledBy="testing-title">
       <div className="section-head">
-        <span className="section-index">09</span>
+        <span className="section-index">11</span>
         <AnimatedHeading>
           <span id="testing-title">{TESTING.title}</span>
         </AnimatedHeading>

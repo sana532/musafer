@@ -11,7 +11,7 @@ export function FeaturesSlide() {
   return (
     <PresentationSection id="features" labelledBy="features-title">
       <div className="section-head">
-        <span className="section-index">04</span>
+        <span className="section-index">06</span>
         <AnimatedHeading>
           <span id="features-title">ميزات تطبيقنا</span>
         </AnimatedHeading>

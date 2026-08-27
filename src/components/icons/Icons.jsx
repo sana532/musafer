@@ -212,6 +212,16 @@ export function DatabaseIcon() {
   )
 }
 
+export function GlobeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="8.2" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M12 3.8v16.4M3.8 12h16.4" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M7.2 5.8c2 2.4 2 9.8 0 12.4M16.8 5.8c-2 2.4-2 9.8 0 12.4" stroke="currentColor" strokeWidth="1.2" />
+    </svg>
+  )
+}
+
 export const LINE_ICONS = {
   building: BuildingIcon,
   driver: DriverIcon,
@@ -235,6 +245,7 @@ export const LINE_ICONS = {
   expand: ExpandIcon,
   server: ServerIcon,
   database: DatabaseIcon,
+  globe: GlobeIcon,
 }
 
 export const STAKEHOLDER_ICONS = {

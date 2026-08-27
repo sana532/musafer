@@ -3,20 +3,22 @@
  * Only slides with status "ready" are rendered.
  * Later slides can be added here without changing the shell.
  */
-export const TOTAL_PLANNED = 11
+export const TOTAL_PLANNED = 13
 
 export const SLIDES = [
   { id: 'cover', n: '01', label: 'الغلاف', status: 'ready' },
   { id: 'problem', n: '02', label: 'المشكلة', status: 'ready' },
   { id: 'requirements', n: '03', label: 'تجميع المتطلبات', status: 'ready' },
-  { id: 'features', n: '04', label: 'ميزات تطبيقنا', status: 'ready' },
-  { id: 'nfr', n: '05', label: 'المتطلبات غير الوظيفية', status: 'ready' },
-  { id: 'process', n: '06', label: 'النموذج الإجرائي', status: 'ready' },
-  { id: 'architecture', n: '07', label: 'البنية المعمارية', status: 'ready' },
-  { id: 'challenges', n: '08', label: 'العوائق والتحديات', status: 'ready' },
-  { id: 'testing', n: '09', label: 'الاختبارات والتحقق', status: 'ready' },
-  { id: 'future', n: '10', label: 'الآفاق المستقبلية', status: 'ready' },
-  { id: 'closing', n: '11', label: 'الخاتمة', status: 'ready' },
+  { id: 'solution', n: '04', label: 'أين يقف السوق اليوم؟', status: 'ready' },
+  { id: 'beneficiaries', n: '05', label: 'المستفيدون من التطبيق', status: 'ready' },
+  { id: 'features', n: '06', label: 'ميزات تطبيقنا', status: 'ready' },
+  { id: 'challenges', n: '07', label: 'العوائق والتحديات', status: 'ready' },
+  { id: 'nfr', n: '08', label: 'المتطلبات غير الوظيفية', status: 'ready' },
+  { id: 'architecture', n: '09', label: 'البنية المعمارية', status: 'ready' },
+  { id: 'process', n: '10', label: 'النموذج الإجرائي', status: 'ready' },
+  { id: 'testing', n: '11', label: 'الاختبارات والتحقق', status: 'ready' },
+  { id: 'future', n: '12', label: 'الآفاق المستقبلية', status: 'ready' },
+  { id: 'closing', n: '13', label: 'الخاتمة', status: 'ready' },
 ]
 
 export const READY_SLIDES = SLIDES.filter((slide) => slide.status === 'ready')
@@ -111,6 +113,59 @@ export const REQUIREMENTS = {
   ],
 }
 
+export const SOLUTION = {
+  kicker: 'أين يقف السوق اليوم؟',
+  problem: 'الحلول الحالية تدير كل شركة بمعزل عن الأخرى.',
+  gaps: [
+    'غياب التتبع اللحظي',
+    'عزلة الأنظمة — تطبيق منفصل لكل شركة',
+    'غياب تذاكر وباقات اشتراك متطورة',
+    'غياب لوحة تحكم مركزية',
+  ],
+  title: 'الحل: مسافر',
+  lede: 'نظام واحد متكامل, لإدارة رحلات النقل البري.',
+  bridge: 'وهنا تكمن الفجوة التي يسدها مسافر.',
+}
+
+export const BENEFICIARIES = {
+  title: 'المستفيدون من التطبيق',
+  subtitle: 'أربعة أطراف، كل منها يجد في مسافر ما يحتاجه.',
+  cards: [
+    {
+      id: 'passenger',
+      title: 'المسافر',
+      body: 'يحجز رحلته، يتتبعها، ويدفع بسهولة، دون أي تعقيد.',
+      device: 'phone',
+      src: '/passenger-screenshot.jpg',
+      ratio: '704 / 1518',
+    },
+    {
+      id: 'driver',
+      title: 'السائق',
+      body: 'يدير رحلته ويتحقق من ركابه من واجهة واحدة بسيطة.',
+      device: 'phone',
+      src: '/driver-screenshot.jpg',
+      ratio: '704 / 1496',
+    },
+    {
+      id: 'company',
+      title: 'الشركة',
+      body: 'تدير أسطولها وحجوزاتها وسائقيها من لوحة تحكم موحّدة.',
+      device: 'laptop',
+      src: '/company-screenshot.png',
+      ratio: '1914 / 870',
+    },
+    {
+      id: 'admin',
+      title: 'مدير المنصة (Super Admin)',
+      body: 'يشرف على كل الشركات والمستخدمين والعمليات من مكان واحد.',
+      device: 'laptop',
+      src: '/admin-screenshot.png',
+      ratio: '1918 / 876',
+    },
+  ],
+}
+
 export const FEATURE_SHOWCASE = [
   {
     id: 'tracking',
@@ -120,10 +175,10 @@ export const FEATURE_SHOWCASE = [
     lede: 'وعند انقطاع الاتصال، يُقدَّر الموقع تلقائيًا حتى تعود الإشارة.',
   },
   {
-    id: 'qr',
+    id: 'scheduling',
     n: '02',
-    title: 'تذاكر QR',
-    body: 'تحقق سريع وآمن من الهوية والحجز عبر رمز QR.',
+    title: 'جدولة الرحلات',
+    body: 'جدولة سلسة ومرنة للرحلات والمواعيد.',
   },
   {
     id: 'ai-reports',
@@ -132,28 +187,28 @@ export const FEATURE_SHOWCASE = [
     body: 'تلخيص وتحليل تلقائي لبيانات الأداء.',
   },
   {
-    id: 'scheduling',
-    n: '04',
-    title: 'جدولة الرحلات',
-    body: 'جدولة سلسة ومرنة للرحلات والمواعيد.',
-  },
-  {
-    id: 'seats',
-    n: '05',
-    title: 'اختيار مقعد محدد',
-    body: 'حجز مقعد بعينه عند إتمام العملية.',
-  },
-  {
     id: 'payment',
-    n: '06',
+    n: '04',
     title: 'الدفع الإلكتروني',
     body: 'إتمام الدفع رقميًا بأمان.',
   },
   {
+    id: 'qr',
+    n: '05',
+    title: 'تذاكر QR',
+    body: 'تحقق سريع وآمن من الهوية والحجز عبر رمز QR.',
+  },
+  {
     id: 'plans',
-    n: '07',
+    n: '06',
     title: 'باقات الاشتراك',
     body: 'خطط اشتراك مرنة للمستخدمين المتكررين.',
+  },
+  {
+    id: 'alerts',
+    n: '07',
+    title: 'الإشعارات الفورية',
+    body: 'تنبيه فوري بكل تحديث يهم الرحلة والحجز.',
   },
 ]
 
@@ -313,46 +368,109 @@ export const ARCHITECTURE = {
   title: 'البنية المعمارية',
   claim: 'أربعة مداخل. نقطة واحدة.',
   lede: 'كل طرف يدخل من واجهته، والمنطق والبيانات في مكان واحد.',
-  clients: [
-    { id: 'passenger', ar: 'تطبيق المسافر', stack: 'Passenger App · Flutter', icon: 'people' },
-    { id: 'driver', ar: 'تطبيق السائق', stack: 'Driver App · Flutter', icon: 'driver' },
-    { id: 'company', ar: 'لوحة الشركة', stack: 'Company Dashboard · React', icon: 'building' },
-    { id: 'admin', ar: 'مدير المنصة', stack: 'Super Admin · React / Filament', icon: 'control' },
-  ],
-  backend: { label: 'Backend / API', stack: 'Laravel', icon: 'server' },
-  database: { label: 'Database', stack: 'PostgreSQL', icon: 'database' },
-  services: [
-    'Queues · Caching',
-    'Seat Locking',
-    'QR Tickets',
-    'Payment · نقدي / إلكتروني',
-    'Notifications · FCM',
-    'GPS / WebSockets',
+  layers: [
+    {
+      id: 'clients',
+      n: '01',
+      ar: 'طبقة الواجهات',
+      en: 'Client Layer',
+      items: [
+        { id: 'admin', ar: 'مدير المنصة', stack: 'React' },
+        { id: 'company', ar: 'لوحة الشركة', stack: 'React' },
+        { id: 'driver', ar: 'تطبيق السائق', stack: 'Flutter' },
+        { id: 'passenger', ar: 'تطبيق المسافر', stack: 'Flutter' },
+      ],
+    },
+    {
+      id: 'runtime',
+      n: '02',
+      ar: 'طبقة التشغيل',
+      en: 'Runtime · Docker',
+      docker: true,
+      items: [
+        { id: 'nginx', ar: 'Nginx', stack: 'Proxy · SSL · :443' },
+        { id: 'laravel', ar: 'Laravel', stack: 'REST API', accent: true },
+        { id: 'reverb', ar: 'Reverb', stack: 'WebSockets / GPS' },
+        { id: 'queue', ar: 'Queue Worker', stack: 'Async Jobs' },
+        { id: 'redis', ar: 'Redis', stack: 'Cache · OTP · Locks' },
+        { id: 'evolution', ar: 'Evolution API', stack: 'WhatsApp Messaging' },
+      ],
+    },
+    {
+      id: 'data',
+      n: '03',
+      ar: 'طبقة البيانات',
+      en: 'Data Layer · Docker',
+      docker: true,
+      items: [{ id: 'postgres', ar: 'PostgreSQL + PostGIS' }],
+    },
+    {
+      id: 'external',
+      n: '04',
+      ar: 'خدمات خارجية',
+      en: 'External · SaaS',
+      items: [
+        { id: 'stripe', ar: 'Stripe + Webhooks', stack: 'Card Payment' },
+        { id: 'r2', ar: 'Cloudflare R2', stack: 'Reports · Files' },
+        { id: 'fcm', ar: 'FCM', stack: 'Push Notifications' },
+      ],
+    },
+    {
+      id: 'capabilities',
+      n: '05',
+      ar: 'قدرات المنصة',
+      en: 'Business Capabilities',
+      tags: [
+        'QR Tickets',
+        'Seat Locking',
+        'Cash / Wallet / Card',
+        'Real-time Tracking',
+        'AI Trip Search',
+        'AI Report Summaries',
+      ],
+    },
   ],
 }
 
 export const CHALLENGES = {
   title: 'العوائق والتحديات',
-  claim: 'أصعب جزء لم يكن الواجهة.',
-  subtitle: 'ثلاثة مخاطر هندسية حُسمت مبكراً: القفل، التتبع، والبحث.',
-  cards: [
+  claim: 'ليست تقنية فقط.',
+  hub: 'مسافر',
+  nodes: [
     {
-      id: 'locking',
-      n: '01',
-      title: 'حجز المقاعد المتزامن',
-      body: 'Seat Locking يمنع تعارض مستخدمين على المقعد نفسه، مع قيود صارمة في قاعدة البيانات.',
+      id: 'external',
+      kind: 'خارجية',
+      key: 'الدفع الإلكتروني',
+      hint: 'تكاملات خارجية + متطلبات تنظيمية',
+      icon: 'globe',
     },
     {
-      id: 'tracking',
-      n: '02',
-      title: 'التتبع اللحظي',
-      body: 'السائق يرسل الموقع عبر WebSockets. إذا انقطع التحديث لأكثر من دقيقة، تعالج الخلفية الحالة تلقائيًا.',
+      id: 'social',
+      kind: 'مجتمعية',
+      key: 'التحول الرقمي',
+      hint: 'انتقال من الإجراءات التقليدية إلى الرقمية',
+      icon: 'people',
     },
     {
-      id: 'search',
-      n: '03',
-      title: 'أداء البحث',
-      body: 'فهرسة + Caching. اختبار 18,888 طلباً: نجاح 99.86% · متوسط 259ms داخل الخادم.',
+      id: 'market',
+      kind: 'تسويقية',
+      key: 'تبنّي الشركات',
+      hint: 'تحدٍ متوقع: تبنّي شركات النقل للمنصة',
+      icon: 'building',
+    },
+    {
+      id: 'tech',
+      kind: 'تقنية',
+      key: 'Seat Locking\n+ Live GPS',
+      hint: 'Concurrency + Real-time Tracking',
+      icon: 'lock',
+    },
+    {
+      id: 'research',
+      kind: 'بحثية',
+      key: 'البيانات المهيكلة',
+      hint: 'بيانات تشغيلية غير موحدة',
+      icon: 'database',
     },
   ],
 }

@@ -5,9 +5,9 @@ import { LiveTrackingVisual } from './LiveTrackingVisual'
 import { QrTicketVisual } from './QrTicketVisual'
 import { AiReportsVisual } from './AiReportsVisual'
 import { TripScheduleVisual } from './TripScheduleVisual'
-import { SeatPickVisual } from './SeatPickVisual'
 import { PaySecureVisual } from './PaySecureVisual'
 import { PlanStackVisual } from './PlanStackVisual'
+import { NotifyBellVisual } from './NotifyBellVisual'
 
 const TOTAL = FEATURE_SHOWCASE.length
 
@@ -21,12 +21,12 @@ function Chevron({ dir = 1 }) {
 
 function FeatureVisual({ feature, active }) {
   if (feature.id === 'tracking') return <LiveTrackingVisual active={active} />
-  if (feature.id === 'qr') return <QrTicketVisual active={active} />
-  if (feature.id === 'ai-reports') return <AiReportsVisual active={active} />
   if (feature.id === 'scheduling') return <TripScheduleVisual active={active} />
-  if (feature.id === 'seats') return <SeatPickVisual active={active} />
+  if (feature.id === 'ai-reports') return <AiReportsVisual active={active} />
   if (feature.id === 'payment') return <PaySecureVisual active={active} />
+  if (feature.id === 'qr') return <QrTicketVisual active={active} />
   if (feature.id === 'plans') return <PlanStackVisual active={active} />
+  if (feature.id === 'alerts') return <NotifyBellVisual active={active} />
   return <div className="feature-visual-idle" aria-hidden="true" />
 }
 

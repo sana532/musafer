@@ -12,7 +12,7 @@ export function ProcessSlide() {
   return (
     <PresentationSection id="process" labelledBy="process-title">
       <div className="section-head">
-        <span className="section-index">06</span>
+        <span className="section-index">10</span>
         <AnimatedHeading>
           <span id="process-title">{PROCESS_MODEL.title}</span>
         </AnimatedHeading>
