@@ -4868,6 +4868,11 @@ html.reduce-motion .arch-map.is-active .arch-band {
   background: transparent;
   border: 0;
   cursor: pointer;
+  transition: transform 0.35s var(--ease);
+}
+
+.challenge-node.is-hot {
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 .challenge-mark {
@@ -4910,7 +4915,7 @@ html.reduce-motion .arch-map.is-active .arch-band {
   left: 50%;
   top: 50%;
   width: max-content;
-  max-width: 10.6rem;
+  max-width: 12.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -4922,46 +4927,20 @@ html.reduce-motion .arch-map.is-active .arch-band {
 
 .challenge-copy small {
   font-size: 0.66rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   color: var(--olive-soft);
 }
 
 .challenge-copy strong {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.35;
   color: var(--cream);
-  white-space: pre-line;
 }
 
-.challenge-slot.is-hot .challenge-copy small {
+.challenge-slot.is-hot .challenge-copy small,
+.challenge-slot.is-hot .challenge-copy strong {
   color: var(--gold);
-}
-
-.challenge-hint {
-  display: block;
-  max-width: 12.4rem;
-  max-height: 0;
-  overflow: hidden;
-  margin-top: 0;
-  font-size: 0.72rem;
-  font-weight: 500;
-  line-height: 1.45;
-  color: var(--gold);
-  opacity: 0;
-  transform: translateY(4px);
-  transition:
-    opacity 0.28s var(--ease),
-    transform 0.28s var(--ease),
-    max-height 0.28s var(--ease),
-    margin-top 0.28s var(--ease);
-}
-
-.challenge-slot.is-hot .challenge-hint {
-  max-height: 3.6em;
-  margin-top: 4px;
-  opacity: 1;
-  transform: none;
 }
 
 @keyframes challenge-node-in {
@@ -5043,8 +5022,9 @@ html.reduce-motion .arch-map.is-active .arch-band {
     transform: none;
   }
 
-  .challenge-hint {
-    max-width: none;
+  .challenge-node.is-hot {
+    transform: none;
+    border-color: var(--gold);
   }
 }
 
@@ -6409,5 +6389,92 @@ html.reduce-motion #closing .arrival-line {
     stroke-dashoffset: 0;
     animation: none;
   }
+  
+}
+/* —— Feature: الحجز الأوفلاين —— */
+.offline-booking {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
+.offline-booking-mark {
+  width: min(100%, 420px);
+  height: auto;
+  overflow: visible;
+}
+
+.ob-link {
+  stroke: var(--olive-soft);
+  stroke-width: 1.4;
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s var(--ease);
+}
+
+.offline-booking.is-active .ob-link {
+  stroke-dashoffset: 0;
+}
+
+.ob-icon {
+  stroke: var(--olive-soft);
+  stroke-width: 1.4;
+  fill: none;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+
+.offline-booking.is-active .ob-icon {
+  opacity: 1;
+}
+
+.ob-check {
+  stroke: var(--gold);
+  stroke-width: 1.8;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+
+.offline-booking.is-confirmed .ob-check {
+  opacity: 1;
+}
+
+.ob-pulse {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(197, 169, 106, 0.55);
+  offset-path: path('M170 60 C 130 20, 90 100, 50 60');
+  offset-distance: 0%;
+  opacity: 0;
+  transition: offset-distance 1.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+.offline-booking.is-traveling .ob-pulse {
+  opacity: 1;
+  offset-distance: 100%;
+}
+.offline-booking.is-confirmed .ob-pulse {
+  opacity: 0;
+}
+
+html.reduce-motion .offline-booking .ob-link {
+  stroke-dashoffset: 0;
+  animation: none;
+}
+
+html.reduce-motion .offline-booking .ob-icon,
+html.reduce-motion .offline-booking .ob-check {
+  opacity: 1;
+  transition: none;
+}
+
+html.reduce-motion .offline-booking .ob-pulse {
+  display: none;
+}

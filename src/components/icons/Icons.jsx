@@ -222,6 +222,16 @@ export function GlobeIcon() {
   )
 }
 
+export function CardIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3.5" y="6.5" width="17" height="11" rx="1.8" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M3.5 10h17" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M7 14.5h4.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 export const LINE_ICONS = {
   building: BuildingIcon,
   driver: DriverIcon,
@@ -246,6 +256,7 @@ export const LINE_ICONS = {
   server: ServerIcon,
   database: DatabaseIcon,
   globe: GlobeIcon,
+  card: CardIcon,
 }
 
 export const STAKEHOLDER_ICONS = {

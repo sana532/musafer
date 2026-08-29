@@ -168,23 +168,23 @@ export const BENEFICIARIES = {
 
 export const FEATURE_SHOWCASE = [
   {
-    id: 'tracking',
+    id: 'scheduling',
     n: '01',
+    title: 'جدولة الرحلات',
+    body: 'جدولة سلسة ومرنة للرحلات والمواعيد.',
+  },
+  {
+    id: 'tracking',
+    n: '02',
     title: 'التتبع اللحظي',
     body: 'تتبع موقع الرحلة لحظيًا أثناء السير.',
     lede: 'وعند انقطاع الاتصال، يُقدَّر الموقع تلقائيًا حتى تعود الإشارة.',
   },
   {
-    id: 'scheduling',
-    n: '02',
-    title: 'جدولة الرحلات',
-    body: 'جدولة سلسة ومرنة للرحلات والمواعيد.',
-  },
-  {
-    id: 'ai-reports',
+    id: 'offline-booking',
     n: '03',
-    title: 'تقارير مولّدة بالذكاء الاصطناعي',
-    body: 'تلخيص وتحليل تلقائي لبيانات الأداء.',
+    title: 'الحجز الأوفلاين',
+    body: 'حجز مقعد لمسافر لا يمتلك التطبيق، عبر اتصال هاتفي أو حضوري مباشر.',
   },
   {
     id: 'payment',
@@ -209,6 +209,12 @@ export const FEATURE_SHOWCASE = [
     n: '07',
     title: 'الإشعارات الفورية',
     body: 'تنبيه فوري بكل تحديث يهم الرحلة والحجز.',
+  },
+  {
+    id: 'ai-reports',
+    n: '08',
+    title: 'تقارير مولّدة بالذكاء الاصطناعي',
+    body: 'تلخيص وتحليل تلقائي لبيانات الأداء.',
   },
 ]
 
@@ -431,46 +437,40 @@ export const ARCHITECTURE = {
     },
   ],
 }
-
 export const CHALLENGES = {
   title: 'العوائق والتحديات',
   claim: 'ليست تقنية فقط.',
   hub: 'مسافر',
   nodes: [
     {
-      id: 'external',
-      kind: 'خارجية',
-      key: 'الدفع الإلكتروني',
-      hint: 'تكاملات خارجية + متطلبات تنظيمية',
-      icon: 'globe',
-    },
-    {
-      id: 'social',
-      kind: 'مجتمعية',
-      key: 'التحول الرقمي',
-      hint: 'انتقال من الإجراءات التقليدية إلى الرقمية',
-      icon: 'people',
-    },
-    {
-      id: 'market',
-      kind: 'تسويقية',
-      key: 'تبنّي الشركات',
-      hint: 'تحدٍ متوقع: تبنّي شركات النقل للمنصة',
-      icon: 'building',
-    },
-    {
-      id: 'tech',
-      kind: 'تقنية',
-      key: 'Seat Locking\n+ Live GPS',
-      hint: 'Concurrency + Real-time Tracking',
+      id: 'seats',
+      n: '01',
+      key: 'حجز المقاعد المتزامن',
       icon: 'lock',
     },
     {
-      id: 'research',
-      kind: 'بحثية',
-      key: 'البيانات المهيكلة',
-      hint: 'بيانات تشغيلية غير موحدة',
+      id: 'location',
+      n: '02',
+      key: 'استمرارية التتبع',
+      icon: 'pin',
+    },
+    {
+      id: 'digital',
+      n: '03',
+      key: 'التحول الرقمي بقطاع النقل',
+      icon: 'building',
+    },
+    {
+      id: 'growth',
+      n: '04',
+      key: 'النمو في المستخدمين والرحلات',
       icon: 'database',
+    },
+    {
+      id: 'fraud',
+      n: '05',
+      key: 'الحماية من الحجوزات الوهمية',
+      icon: 'shield',
     },
   ],
 }

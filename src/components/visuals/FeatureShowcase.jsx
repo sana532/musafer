@@ -8,6 +8,7 @@ import { TripScheduleVisual } from './TripScheduleVisual'
 import { PaySecureVisual } from './PaySecureVisual'
 import { PlanStackVisual } from './PlanStackVisual'
 import { NotifyBellVisual } from './NotifyBellVisual'
+import { OfflineBookingVisual } from './OfflineBookingVisual'
 
 const TOTAL = FEATURE_SHOWCASE.length
 
@@ -27,6 +28,7 @@ function FeatureVisual({ feature, active }) {
   if (feature.id === 'qr') return <QrTicketVisual active={active} />
   if (feature.id === 'plans') return <PlanStackVisual active={active} />
   if (feature.id === 'alerts') return <NotifyBellVisual active={active} />
+  if (feature.id === 'offline-booking') return <OfflineBookingVisual active={active} />
   return <div className="feature-visual-idle" aria-hidden="true" />
 }
 

@@ -9,8 +9,9 @@ const CY = 52
 const RADIUS = 34
 const START_DEG = -90
 
-function polar(index) {
-  const deg = START_DEG + index * 72
+function polar(index, total) {
+  const step = 360 / total
+  const deg = START_DEG + index * step
   const rad = (deg * Math.PI) / 180
   const nx = Math.cos(rad)
   const ny = Math.sin(rad)
@@ -22,10 +23,10 @@ function polar(index) {
   }
 }
 
-function pentagonD() {
+function polygonD(total) {
   return (
-    Array.from({ length: 5 }, (_, i) => {
-      const point = polar(i)
+    Array.from({ length: total }, (_, i) => {
+      const point = polar(i, total)
       return `${i === 0 ? 'M' : 'L'}${point.x.toFixed(2)} ${point.y.toFixed(2)}`
     }).join(' ') + 'Z'
   )
@@ -38,9 +39,13 @@ export function ChallengeOrbit({ active = false }) {
   const [open, setOpen] = useState(null)
   const openRef = useRef(null)
   openRef.current = open
+  const total = CHALLENGES.nodes.length
   const ids = useMemo(() => CHALLENGES.nodes.map((node) => node.id), [])
-  const ring = useMemo(() => pentagonD(), [])
-  const points = useMemo(() => CHALLENGES.nodes.map((_, index) => polar(index)), [])
+  const ring = useMemo(() => polygonD(total), [total])
+  const points = useMemo(
+    () => CHALLENGES.nodes.map((_, index) => polar(index, total)),
+    [total],
+  )
 
   useEffect(() => {
     if (active) setPlayed(true)
@@ -138,13 +143,12 @@ export function ChallengeOrbit({ active = false }) {
                 onFocus={() => onEnter(node.id)}
                 onBlur={onLeave}
                 onClick={() => onToggle(node.id)}
-                aria-expanded={hot}
+                aria-pressed={hot}
               >
                 <span className="challenge-mark">{Icon ? <Icon /> : null}</span>
                 <span className="challenge-copy">
-                  <small>{node.kind}</small>
+                  <small>{node.n}</small>
                   <strong>{node.key}</strong>
-                  <span className="challenge-hint">{node.hint}</span>
                 </span>
               </button>
             </div>
