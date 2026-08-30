@@ -19,13 +19,13 @@ export default function App() {
       <CoverSlide />
       <ProblemSlide />
       <RequirementsSlide />
+      <ProcessSlide />
       <SolutionSlide />
       <BeneficiariesSlide />
       <FeaturesSlide />
       <ChallengesSlide />
       <NfrSlide />
       <ArchitectureSlide />
-      <ProcessSlide />
       <TestingSlide />
       <FutureSlide />
       <ClosingSlide />
